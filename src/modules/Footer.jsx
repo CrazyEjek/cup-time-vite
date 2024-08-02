@@ -1,9 +1,9 @@
 export const Footer = () => {
     return (
         <footer className="footer">
-        <div className="footer__container">
+        <div className="container footer__container">
             <a className="footer__logo-link">
-                <img src="/image/logo.svg" alt="Логотип Cup Time" className="header__logo"/>
+                <img src="/image/logo.svg" alt="Логотип Cup Time" className="footer__logo"/>
             </a>
 
             <div className="footer__nav">
@@ -28,7 +28,6 @@ export const Footer = () => {
 
 
                 <div className="footer__info">
-
                     <p className="footer__copyright">© CupTime, 2024</p>
 
                     <ul className="footer__developers">
@@ -44,7 +43,7 @@ export const Footer = () => {
                 <div className="footer__contacts">
                     <a href="mailto:CUPTIME@gmail.com" className="footer__email">CUPTIME@gmail.com</a>
 
-                    <ul className="footer__social__list">
+                    <ul className="footer__social">
                         <li className="footer__social__item">
                             <a href="" className="footer__social-link">
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

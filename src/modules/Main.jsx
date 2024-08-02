@@ -9,6 +9,7 @@ export const Main = () => {
     <Promo/>
     <Products/>
 
+
 </main>
 );
 };
