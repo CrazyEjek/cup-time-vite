@@ -93,6 +93,10 @@ input[type="number"] {
       gap: 50px;
 }
 
+.header__menu-link.active {
+  color: #64099b;
+}
+
 .header__cart-link {
   width: 28px;
   height: 28px;
@@ -178,6 +182,7 @@ input[type="number"] {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+  -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
