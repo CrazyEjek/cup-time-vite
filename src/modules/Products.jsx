@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Product } from "./Product";
 import { useProducts } from "../context/ProductContext";
 import { useSearchParams } from "react-router-dom";
+import { SkeletonLoader } from "./SkeletonLoader";
 
 
 export const Products = () => {
@@ -20,9 +21,10 @@ export const Products = () => {
         <h2 className="products__title">Чай</h2>
 
         <ul className="products__list">
-        {products.map((item) => (
-        <Product key={item.id} data={item} />
-        ))}
+        {products.length ? (
+             products.map((item) => <Product key={item.id} data={item} />)
+        ) : ( <SkeletonLoader/>
+    )}
         </ul>
     </div>
 </section>
