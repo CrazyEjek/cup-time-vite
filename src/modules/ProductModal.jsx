@@ -2,6 +2,7 @@
 import Modal from "react-modal";
 import { API_URL } from "../const";
 import { useState } from "react";
+import { useCart } from "../context/CartContext.jsx";
 
 
 const customStyles = {
@@ -20,6 +21,8 @@ Modal.setAppElement("#root");
 
 export const ProductModal = ({isOpen, onRequestClose, data}) => {
     const [quantity, setQuantity] = useState(1);
+    const {addToCart} = useCart()
+
     if (!data) {
         return null;
     }
@@ -35,7 +38,8 @@ export const ProductModal = ({isOpen, onRequestClose, data}) => {
     };
 
     const handleAddToCart = () => {
-        // !todo добавить товар в корзину
+       addToCart(data, quantity);
+       onRequestClose();
     };
 
     return <Modal

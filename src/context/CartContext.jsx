@@ -3,7 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 const CartContext = createContext();
 
 export const CartProvider = ({children}) => {
-    const [cart, setCart] = useState([]);
+  // не хочет он здесь null!!!!!!!!  
+  const [cart, setCart] = useState(null);
 
 useEffect(() => {
     const storeCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -11,18 +12,19 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart))
+  if(Array.isArray(cart)) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
 }, [cart]);
 
 const addToCart = (product, quantity) => {
     const newCart = [...cart];
-
-    const itemIndex = newCart.findIndex(item => item.id = product.id);
+    const itemIndex = newCart.findIndex((item) => item.id === product.id);
 
     if (itemIndex >= 0) {
-        newCart[itemIndex].quantity += quantity
+        newCart[itemIndex].quantity += quantity;
     } else {
-        newCart.push({...product, quantity})
+        newCart.push({...product, quantity});
     }
     setCart(newCart);
 };
@@ -38,8 +40,8 @@ const updateQuantity = (productId, quantity) => {
         removeFromCart(productId);
     } else {
       setCart(
-        cart.map((item) =>
-          item.id === productId ? { ...item, quantity } : item,
+        cart.map(
+          (item) => (item.id === productId ? { ...item, quantity } : item),
         ),
       );
     }

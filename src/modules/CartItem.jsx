@@ -1,15 +1,43 @@
-export const CartItem = ({data}) => (
-<li className="cart-item">
-            <img src={data.image} alt={data.title} className="cart-item__image" />
+import { useState } from "react";
+import { API_URL } from "../const";
+import { useCart } from "../context/CartContext";
+
+export const CartItem = ({data}) => {
+
+    const [itemQuantity, setItemQuantity] = useState(data.quantity);
+    const {updateQuantity, removeFromCart} = useCart();
+
+    const handleDecrease = () => {
+        const newQuantity = itemQuantity - 1;
+        if (newQuantity > 1) {
+            setItemQuantity(newQuantity);
+            updateQuantity(data.id, newQuantity);
+        } else {
+            removeFromCart(data.id);
+        }
+    };
+
+    const handleIncrease = () => {
+        const newQuantity = itemQuantity + 1;
+        setItemQuantity(newQuantity);
+        updateQuantity(data.id, newQuantity);
+    };
+
+    return (
+        <li className="cart-item">
+            <img src={`${API_URL}${data.img}`} alt={data.title} className="cart-item__image" />
 
             <div className="cart-item__info">
                 <h3 className="cart-item__title">{data.title}</h3>
                 <div className="cart-item__quantity">
-                <button className="cart-item__quantity-button cart-item__quantity-button_minus"></button>
-                    <input type="number" value={1} className="cart-item__quantity-input" />
-                <button className="cart-item__quantity-button cart-item__quantity-button_plus"></button>
+                <button className="cart-item__quantity-button cart-item__quantity-button_minus" onClick={handleDecrease}></button>
+
+                    <input type="number" value={data.quantity} className="cart-item__quantity-input" readOnly/>
+                    
+                <button className="cart-item__quantity-button cart-item__quantity-button_plus" onClick={handleIncrease}></button>
                 </div>
-                <p className="cart-item__price">{data.price}&nbsp;₽</p>
+                <p className="cart-item__price">{data.price * data.quantity}&nbsp;₽</p>
             </div>
         </li>
-        );
+    );
+};
