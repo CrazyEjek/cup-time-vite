@@ -1,4 +1,15 @@
-export const Order = () => (
+import { useOrder } from "../context/OrderContext";
+
+export const Order = () => {
+
+const {orderDetails, updateOrderDetails} = useOrder();
+
+const handleChange = (e) => {
+  const {name, value} = e.target;
+  updateOrderDetails(name, value);
+};
+
+  return(
     <section className="order">
         <div className="container">
             <h2 className="order__title">Доставка</h2>
@@ -8,19 +19,25 @@ export const Order = () => (
                 type="text" 
                 className="order__input" 
                 name="name" 
-                placeholder="Имя" />
+                placeholder="Имя"
+                value={orderDetails.name}
+                onChange={handleChange} />
 
                 <input 
                 type="text" 
                 className="order__input" 
                 name="phone" 
-                placeholder="Телефон" />
+                placeholder="Телефон"
+                value={orderDetails.phone}
+                onChange={handleChange} />
 
                 <input 
                 type="text" 
                 className="order__input order__input_address" 
                 name="address" 
-                placeholder="Адрес" />
+                placeholder="Адрес"
+                value={orderDetails.address}
+                onChange={handleChange} />
 
                 <fieldset className="order__payment">
                 <legend className="order__payment-title">Оплата:</legend>
@@ -31,8 +48,10 @@ export const Order = () => (
                     className="order__radio" 
                     type="radio" 
                     name="payment" 
-                    value="cash" 
-                    defaultChecked/>
+                    value="cash"
+                    checked={orderDetails.payment === "cash"}
+                    onChange={handleChange} 
+                    />
                     Наличными
                   </label>
       
@@ -41,14 +60,14 @@ export const Order = () => (
                     className="order__radio" 
                     type="radio" 
                     name="payment" 
-                    value="credit card"/>
+                    value="card"
+                    checked={orderDetails.payment === "card"}
+                    onChange={handleChange}
+                    />
                     Картой
                   </label>
-                
               </fieldset>
-
             </form>
         </div>
-        
     </section>
-);
+)};
