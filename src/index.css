@@ -467,6 +467,32 @@ input[type="number"] {
 }
 
 
+.modal-cart {
+  background-color: #f2f9f7;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 12px;
+
+}
+.modal-cart__overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  inset: 0;
+
+}
+.modal-cart__title {
+  font-size: 36px;
+}
+.modal-cart__button {
+  background-color: #64099b;
+  color: #fff;
+}
+
 @media (max-width: 1240px) {
 
   .container {
