@@ -9,7 +9,7 @@ export const CartItem = ({data}) => {
 
     const handleDecrease = () => {
         const newQuantity = itemQuantity - 1;
-        if (newQuantity > 1) {
+        if (newQuantity > 0) {
             setItemQuantity(newQuantity);
             updateQuantity(data.id, newQuantity);
         } else {
